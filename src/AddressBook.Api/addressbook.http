@@ -1,0 +1,6 @@
+@AddressBook.Api_HostAddress = http://localhost:8000
+
+GET {{AddressBook.Api_HostAddress}}/api/entries
+Accept: application/json
+
+###
