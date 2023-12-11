@@ -15,7 +15,12 @@ builder.Services.AddTransient<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.MapApis();
+
+app.MapFallbackToFile("/index.html");
 
 app.Run();
 
