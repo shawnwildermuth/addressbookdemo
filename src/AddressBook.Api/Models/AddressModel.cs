@@ -1,6 +1,6 @@
-﻿namespace AddressBook.Api.Data.Entities;
+﻿namespace AddressBook.Api.Models;
 
-public class Address
+public class AddressModel
 {
   public int Id { get; set; }
   public string? Name { get; set; }
@@ -11,7 +11,4 @@ public class Address
   public string? StateProvince { get; set; }
   public string? PostalCode { get; set; }
   public string? Country { get; set; }
-
-  public int BookEntryId { get; set; }
-
 }

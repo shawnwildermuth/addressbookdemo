@@ -10,7 +10,6 @@ public class BookEntryFaker : Faker<BookEntry>
  
     UseSeed(1969) // Use any number
       .RuleFor(c => c.Id, f => ++f.IndexVariable)
-      .RuleFor(c => c.AddressName, f => f.Random.Words(2))
       .RuleFor(c => c.CompanyName, f => f.Company.CompanyName())
       .RuleFor(c => c.FirstName, f => f.Name.FirstName())
       .RuleFor(c => c.MiddleName, f => f.Name.FirstName())

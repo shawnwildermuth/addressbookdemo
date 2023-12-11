@@ -1,6 +1,6 @@
-﻿namespace AddressBook.Api.Data.Entities;
+﻿namespace AddressBook.Api.Models;
 
-public class BookEntry
+public class BookEntryModel
 {
   public int Id { get; set; }
   public string? CompanyName { get; set; }
@@ -13,7 +13,7 @@ public class BookEntry
   public string? WorkPhone { get; set; }
   public string? CellPhone { get; set; }
   public string? Email { get; set; }
-  public string? UserName { get; set; }
 
-  public ICollection<Address> Addresses { get; set; } = new List<Address>();
+  public ICollection<AddressModel> Addresses { get; set; } = new List<AddressModel>();
+
 }

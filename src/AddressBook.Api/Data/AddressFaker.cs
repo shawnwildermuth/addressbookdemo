@@ -9,6 +9,7 @@ public class AddressFaker : Faker<Address>
   {
     UseSeed(1969)
       .RuleFor(c => c.Id, f => ++f.IndexVariable)
+      .RuleFor(c => c.Name, f => f.Random.Words(2))
       .RuleFor(c => c.Line1, f => f.Address.StreetAddress())
       .RuleFor(c => c.Line2, f => f.Address.SecondaryAddress().OrNull(f, .5f))
       .RuleFor(c => c.Line3, f => f.Address.SecondaryAddress().OrNull(f, .05f))

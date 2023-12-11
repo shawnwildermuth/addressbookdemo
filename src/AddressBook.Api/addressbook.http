@@ -1,6 +1,24 @@
 @AddressBook.Api_HostAddress = http://localhost:8000
 
-GET {{AddressBook.Api_HostAddress}}/api/entries
+GET {{AddressBook.Api_HostAddress}}/api/book
 Accept: application/json
 
 ###
+
+GET {{AddressBook.Api_HostAddress}}/api/book/entries
+Accept: application/json
+
+###
+
+POST {{AddressBook.Api_HostAddress}}/api/book/entries
+Content-Type: application/json
+
+{
+  "companyName" : "",
+  "firstName" : "Shawn",
+  "lastName" : "Wildermuth",
+  "dateOfBirth" : "1969-03-03",
+  "gender" : "Male",
+  "cellPhone" : "404-555-1212",
+  "email" : "shawn@book.com"
+}
