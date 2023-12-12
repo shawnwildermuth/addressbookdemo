@@ -13,6 +13,8 @@ builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 builder.Services.AddTransient<IBookRepository, BookRepository>();
 
+builder.Services.AddMapsterMaps();
+
 var app = builder.Build();
 
 app.UseDefaultFiles();
