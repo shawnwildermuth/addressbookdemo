@@ -7,6 +7,7 @@ namespace AddressBook.Api.Data
     Task<BookEntry?> GetEntry(int id);
 
     Task<IEnumerable<Address>> GetAddressesForUser(int id);
+    Task<Address?> GetAddressForUser(int id, int addressId);
 
 
     void Add<T>(T entity) where T : class;

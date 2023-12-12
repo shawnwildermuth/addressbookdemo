@@ -26,13 +26,25 @@ public class BookRepository(BookContext context) : IBookRepository
 
   public async Task<IEnumerable<Address>> GetAddressesForUser(int id)
   {
-    var entry = await GetEntry(id);
+    var results = await context.Addresses
+      .Where(a => a.BookEntryId == id)
+      .ToListAsync();
 
-    if (entry is null) return new List<Address>();
+    if (!results.Any()) return new List<Address>();
 
-    return entry.Addresses;
+    return results;
   }
 
+  public async Task<Address?> GetAddressForUser(int id, int addressId)
+  {
+    var address = await context.Addresses
+      .Where(a => a.BookEntryId == id && a.Id == addressId)
+      .FirstOrDefaultAsync();
+
+    if (address is null) return null;
+
+    return address;
+  }
 
   public void Add<T>(T entity) where T : class
   {

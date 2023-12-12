@@ -30,11 +30,11 @@ Content-Type: application/json
 
 ### 
 
-PUT {{host}}/api/book/entries/54
+PUT {{host}}/api/book/entries/51
 Content-Type: application/json
 
 {
-  "id": 54,
+  "id": 51,
   "companyName" : "Some Company",
   "firstName" : "Shawn",
   "lastName" : "Wildermuth",
@@ -46,15 +46,15 @@ Content-Type: application/json
 
 ### 
 
-DELETE {{host}}/api/book/entries/53
+DELETE {{host}}/api/book/entries/51
 
 ###
 
-GET {{host}}/api/book/entries/54/addresses
+GET {{host}}/api/book/entries/40/addresses
 ###
-GET {{host}}/api/book/entries/54/addresses/10
+GET {{host}}/api/book/entries/40/addresses/80
 ###
-POST {{host}}/api/book/entries/54/addresses
+POST {{host}}/api/book/entries/40/addresses
 Content-Type: application/json
 
 {
@@ -69,10 +69,11 @@ Content-Type: application/json
 }
 
 ###
-PUT {{host}}/api/book/entries/40/addresses
+PUT {{host}}/api/book/entries/40/addresses/101
 Content-Type: application/json
 
 {
+  "id": 101,
     "name": "Mega House 2",
     "line1": "39347 Reece Bridge",
     "line2": "4th Floor",
@@ -84,6 +85,6 @@ Content-Type: application/json
 }
 
 ###
-DELETE {{host}}/api/book/entries/40/addresses/40
+DELETE {{host}}/api/book/entries/40/addresses/101
 ###
 

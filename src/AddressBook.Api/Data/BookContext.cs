@@ -22,6 +22,7 @@ public class BookContext
   }
 
   public DbSet<BookEntry> BookEntries => Set<BookEntry>();
+  public DbSet<Address> Addresses => Set<Address>();
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {

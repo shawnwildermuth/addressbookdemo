@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AddressBook.Api.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20231211002126_Initial")]
-    partial class Initial
+    [Migration("20231212085719_InitialDb")]
+    partial class InitialDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,7 +64,7 @@ namespace AddressBook.Api.Migrations
 
                     b.HasIndex("BookEntryId");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
 
                     b.HasData(
                         new
@@ -743,7 +743,7 @@ namespace AddressBook.Api.Migrations
                             Id = 26,
                             CellPhone = "830-799-4314",
                             CompanyName = "Daugherty - Yundt",
-                            DateOfBirth = new DateTime(1957, 8, 31, 4, 1, 53, 221, DateTimeKind.Local).AddTicks(777),
+                            DateOfBirth = new DateTime(1957, 9, 1, 12, 37, 47, 500, DateTimeKind.Local).AddTicks(1217),
                             Email = "Nikko7@yahoo.com",
                             FirstName = "Nikko",
                             Gender = "Female",
@@ -757,7 +757,7 @@ namespace AddressBook.Api.Migrations
                             Id = 27,
                             CellPhone = "381-428-1380",
                             CompanyName = "Weissnat, Jacobs and Klein",
-                            DateOfBirth = new DateTime(2003, 10, 11, 7, 45, 16, 192, DateTimeKind.Local).AddTicks(5290),
+                            DateOfBirth = new DateTime(2003, 10, 12, 16, 21, 10, 471, DateTimeKind.Local).AddTicks(5759),
                             Email = "Jeanne48@hotmail.com",
                             FirstName = "Jeanne",
                             Gender = "Male",
@@ -769,7 +769,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 28,
                             CompanyName = "Stroman - Hamill",
-                            DateOfBirth = new DateTime(1987, 2, 11, 10, 24, 16, 499, DateTimeKind.Local).AddTicks(2415),
+                            DateOfBirth = new DateTime(1987, 2, 12, 19, 0, 10, 778, DateTimeKind.Local).AddTicks(2899),
                             Email = "Shannon_DuBuque72@hotmail.com",
                             FirstName = "Shannon",
                             Gender = "Male",
@@ -782,7 +782,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 29,
                             CompanyName = "Yost Inc",
-                            DateOfBirth = new DateTime(1999, 9, 14, 19, 50, 57, 396, DateTimeKind.Local).AddTicks(2036),
+                            DateOfBirth = new DateTime(1999, 9, 16, 4, 26, 51, 675, DateTimeKind.Local).AddTicks(2747),
                             Email = "Skylar45@yahoo.com",
                             FirstName = "Skylar",
                             Gender = "Male",
@@ -794,7 +794,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 30,
                             CompanyName = "Kirlin, Schamberger and Nicolas",
-                            DateOfBirth = new DateTime(1955, 5, 28, 10, 47, 30, 453, DateTimeKind.Local).AddTicks(6033),
+                            DateOfBirth = new DateTime(1955, 5, 29, 19, 23, 24, 732, DateTimeKind.Local).AddTicks(6598),
                             Email = "Moises_Lowe@gmail.com",
                             FirstName = "Moises",
                             Gender = "Female",
@@ -807,7 +807,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 31,
                             CompanyName = "Murphy Inc",
-                            DateOfBirth = new DateTime(1987, 4, 27, 19, 30, 18, 332, DateTimeKind.Local).AddTicks(963),
+                            DateOfBirth = new DateTime(1987, 4, 29, 4, 6, 12, 611, DateTimeKind.Local).AddTicks(1569),
                             Email = "Samanta57@yahoo.com",
                             FirstName = "Samanta",
                             Gender = "Female",
@@ -820,7 +820,7 @@ namespace AddressBook.Api.Migrations
                             Id = 32,
                             CellPhone = "862-507-6899",
                             CompanyName = "Feeney and Sons",
-                            DateOfBirth = new DateTime(1976, 4, 30, 9, 25, 41, 963, DateTimeKind.Local).AddTicks(3793),
+                            DateOfBirth = new DateTime(1976, 5, 1, 18, 1, 36, 242, DateTimeKind.Local).AddTicks(4358),
                             Email = "Graham28@hotmail.com",
                             FirstName = "Graham",
                             Gender = "Male",
@@ -833,7 +833,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 33,
                             CompanyName = "Johnston, Schulist and Howell",
-                            DateOfBirth = new DateTime(1996, 9, 18, 22, 53, 32, 176, DateTimeKind.Local).AddTicks(5906),
+                            DateOfBirth = new DateTime(1996, 9, 20, 7, 29, 26, 455, DateTimeKind.Local).AddTicks(6507),
                             Email = "Mikel_Cruickshank@gmail.com",
                             FirstName = "Mikel",
                             Gender = "Male",
@@ -845,7 +845,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 34,
                             CompanyName = "Hettinger and Sons",
-                            DateOfBirth = new DateTime(1961, 8, 26, 3, 0, 23, 73, DateTimeKind.Local).AddTicks(1911),
+                            DateOfBirth = new DateTime(1961, 8, 27, 11, 36, 17, 352, DateTimeKind.Local).AddTicks(2376),
                             Email = "Mariane63@yahoo.com",
                             FirstName = "Mariane",
                             Gender = "Male",
@@ -857,7 +857,7 @@ namespace AddressBook.Api.Migrations
                             Id = 35,
                             CellPhone = "860-839-7464",
                             CompanyName = "Schinner, Goldner and Schimmel",
-                            DateOfBirth = new DateTime(1976, 4, 27, 2, 47, 1, 882, DateTimeKind.Local).AddTicks(8983),
+                            DateOfBirth = new DateTime(1976, 4, 28, 11, 22, 56, 161, DateTimeKind.Local).AddTicks(9473),
                             Email = "Kamryn.Boyle13@hotmail.com",
                             FirstName = "Kamryn",
                             Gender = "Male",
@@ -868,7 +868,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 36,
                             CompanyName = "Lind - Mosciski",
-                            DateOfBirth = new DateTime(1996, 11, 9, 5, 28, 48, 927, DateTimeKind.Local).AddTicks(1786),
+                            DateOfBirth = new DateTime(1996, 11, 10, 14, 4, 43, 206, DateTimeKind.Local).AddTicks(2316),
                             Email = "Edna63@gmail.com",
                             FirstName = "Edna",
                             Gender = "Male",
@@ -879,7 +879,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 37,
                             CompanyName = "Wuckert - Bergnaum",
-                            DateOfBirth = new DateTime(1971, 12, 24, 10, 39, 12, 188, DateTimeKind.Local).AddTicks(9664),
+                            DateOfBirth = new DateTime(1971, 12, 25, 19, 15, 6, 468, DateTimeKind.Local).AddTicks(225),
                             Email = "Fannie_Luettgen@hotmail.com",
                             FirstName = "Fannie",
                             Gender = "Female",
@@ -892,7 +892,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 38,
                             CompanyName = "Bergstrom - Price",
-                            DateOfBirth = new DateTime(1978, 1, 2, 5, 22, 55, 486, DateTimeKind.Local).AddTicks(1317),
+                            DateOfBirth = new DateTime(1978, 1, 3, 13, 58, 49, 765, DateTimeKind.Local).AddTicks(1870),
                             Email = "Leonor.Brown84@yahoo.com",
                             FirstName = "Leonor",
                             Gender = "Female",
@@ -904,7 +904,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 39,
                             CompanyName = "Bailey Inc",
-                            DateOfBirth = new DateTime(1980, 3, 30, 2, 7, 19, 92, DateTimeKind.Local).AddTicks(7921),
+                            DateOfBirth = new DateTime(1980, 3, 31, 10, 43, 13, 371, DateTimeKind.Local).AddTicks(8492),
                             Email = "Judge_Wisoky@hotmail.com",
                             FirstName = "Judge",
                             Gender = "Female",
@@ -916,7 +916,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 40,
                             CompanyName = "Gulgowski Group",
-                            DateOfBirth = new DateTime(1988, 8, 4, 23, 5, 13, 596, DateTimeKind.Local).AddTicks(8344),
+                            DateOfBirth = new DateTime(1988, 8, 6, 7, 41, 7, 875, DateTimeKind.Local).AddTicks(8980),
                             Email = "Cordelia_Halvorson92@yahoo.com",
                             FirstName = "Cordelia",
                             Gender = "Female",
@@ -928,7 +928,7 @@ namespace AddressBook.Api.Migrations
                             Id = 41,
                             CellPhone = "364-666-5317",
                             CompanyName = "Wisoky LLC",
-                            DateOfBirth = new DateTime(1993, 3, 15, 2, 1, 22, 872, DateTimeKind.Local).AddTicks(503),
+                            DateOfBirth = new DateTime(1993, 3, 16, 10, 37, 17, 151, DateTimeKind.Local).AddTicks(1165),
                             Email = "Citlalli.Rogahn61@hotmail.com",
                             FirstName = "Citlalli",
                             Gender = "Male",
@@ -940,7 +940,7 @@ namespace AddressBook.Api.Migrations
                             Id = 42,
                             CellPhone = "491-764-8356",
                             CompanyName = "Stokes, Bradtke and Mills",
-                            DateOfBirth = new DateTime(1957, 12, 19, 4, 22, 34, 419, DateTimeKind.Local).AddTicks(5558),
+                            DateOfBirth = new DateTime(1957, 12, 20, 12, 58, 28, 698, DateTimeKind.Local).AddTicks(6247),
                             Email = "Lea.Grant41@gmail.com",
                             FirstName = "Lea",
                             Gender = "Male",
@@ -952,7 +952,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 43,
                             CompanyName = "Crooks - Leffler",
-                            DateOfBirth = new DateTime(1991, 1, 11, 22, 34, 53, 141, DateTimeKind.Local).AddTicks(8377),
+                            DateOfBirth = new DateTime(1991, 1, 13, 7, 10, 47, 420, DateTimeKind.Local).AddTicks(9125),
                             Email = "Vernon87@gmail.com",
                             FirstName = "Vernon",
                             Gender = "Male",
@@ -965,7 +965,7 @@ namespace AddressBook.Api.Migrations
                             Id = 44,
                             CellPhone = "213-581-9061",
                             CompanyName = "Moen, Considine and Ortiz",
-                            DateOfBirth = new DateTime(1955, 7, 24, 7, 9, 40, 299, DateTimeKind.Local).AddTicks(102),
+                            DateOfBirth = new DateTime(1955, 7, 25, 15, 45, 34, 578, DateTimeKind.Local).AddTicks(889),
                             Email = "Jess.Leffler@yahoo.com",
                             FirstName = "Jess",
                             Gender = "Male",
@@ -977,7 +977,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 45,
                             CompanyName = "Hauck - Will",
-                            DateOfBirth = new DateTime(1975, 8, 27, 4, 28, 15, 43, DateTimeKind.Local).AddTicks(3129),
+                            DateOfBirth = new DateTime(1975, 8, 28, 13, 4, 9, 322, DateTimeKind.Local).AddTicks(3950),
                             Email = "Arno.Kling23@gmail.com",
                             FirstName = "Arno",
                             Gender = "Male",
@@ -989,7 +989,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 46,
                             CompanyName = "Weimann, Stroman and Koch",
-                            DateOfBirth = new DateTime(1958, 8, 7, 12, 13, 52, 589, DateTimeKind.Local).AddTicks(8961),
+                            DateOfBirth = new DateTime(1958, 8, 8, 20, 49, 46, 868, DateTimeKind.Local).AddTicks(9749),
                             Email = "Mitchel.Wuckert@hotmail.com",
                             FirstName = "Mitchel",
                             Gender = "Male",
@@ -1001,7 +1001,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 47,
                             CompanyName = "Weber - Crist",
-                            DateOfBirth = new DateTime(1982, 10, 9, 10, 27, 50, 605, DateTimeKind.Local).AddTicks(7597),
+                            DateOfBirth = new DateTime(1982, 10, 10, 19, 3, 44, 884, DateTimeKind.Local).AddTicks(8441),
                             Email = "Raul_Effertz82@gmail.com",
                             FirstName = "Raul",
                             Gender = "Female",
@@ -1014,7 +1014,7 @@ namespace AddressBook.Api.Migrations
                             Id = 48,
                             CellPhone = "666-270-9743",
                             CompanyName = "Kunze, Medhurst and Abshire",
-                            DateOfBirth = new DateTime(1983, 7, 14, 21, 11, 12, 41, DateTimeKind.Local).AddTicks(4397),
+                            DateOfBirth = new DateTime(1983, 7, 16, 5, 47, 6, 320, DateTimeKind.Local).AddTicks(5316),
                             Email = "Antwon.Kassulke@gmail.com",
                             FirstName = "Antwon",
                             Gender = "Male",
@@ -1026,7 +1026,7 @@ namespace AddressBook.Api.Migrations
                             Id = 49,
                             CellPhone = "565-482-0966",
                             CompanyName = "Stiedemann - Aufderhar",
-                            DateOfBirth = new DateTime(1997, 5, 12, 11, 3, 28, 693, DateTimeKind.Local).AddTicks(4403),
+                            DateOfBirth = new DateTime(1997, 5, 13, 19, 39, 22, 972, DateTimeKind.Local).AddTicks(5367),
                             Email = "Richmond28@gmail.com",
                             FirstName = "Richmond",
                             Gender = "Female",
@@ -1038,7 +1038,7 @@ namespace AddressBook.Api.Migrations
                         {
                             Id = 50,
                             CompanyName = "Cruickshank LLC",
-                            DateOfBirth = new DateTime(1997, 4, 4, 3, 26, 44, 148, DateTimeKind.Local).AddTicks(4979),
+                            DateOfBirth = new DateTime(1997, 4, 5, 12, 2, 38, 427, DateTimeKind.Local).AddTicks(5967),
                             Email = "Camden91@yahoo.com",
                             FirstName = "Camden",
                             Gender = "Female",
