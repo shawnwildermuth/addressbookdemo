@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import AddressList from "@/components/AddressList.vue";
-import AddressDetails from "@/components/AddressDetails.vue";
+import EntryList from "@/components/EntryList.vue";
 </script>
 
 <template>
   <div class="w-full  bg-black">
-    <div class="bg-amber-950 text-gray-100 p-2 min-h-screen">
+    <div class="bg-gray-900 text-gray-100 p-2 min-h-screen">
       <header>
         <h1>Address Book</h1>
       </header>
       <div class="flex gap-2">
-        <address-list />
-        <address-details />
+        <entry-list />
+        <div class="p-2 border rounded-lg border-gray-500/50 flex-grow">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
