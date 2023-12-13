@@ -1,4 +1,4 @@
-import { AddressModel } from "./addressModel";
+import { type AddressModel } from "./addressModel";
 
 export interface BookEntryModel {
   id: number;

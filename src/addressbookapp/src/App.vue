@@ -5,11 +5,11 @@ import AddressDetails from "@/components/AddressDetails.vue";
 
 <template>
   <div class="w-full  bg-black">
-    <div class="container mx-auto bg-blue-200 text-gray-900 p-2 min-h-screen">
+    <div class="bg-amber-950 text-gray-100 p-2 min-h-screen">
       <header>
         <h1>Address Book</h1>
       </header>
-      <div class="grid grid-cols-2 gap-1">
+      <div class="flex gap-2">
         <address-list />
         <address-details />
       </div>
