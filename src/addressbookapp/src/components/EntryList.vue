@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useStore } from "@/store";
 import type { BookEntryModel } from "@/models/bookEntryModel";
 import { formatName } from "@/formatters";
@@ -14,7 +14,15 @@ function onSelected(item: BookEntryModel) {
   currentId.value = item.id;
 }
 
-onMounted(async () => await store.loadEntries())
+onMounted(async () => {
+  await store.loadEntries();
+})
+
+watch(router.currentRoute, () => {
+  if (router.currentRoute.value.name === "home") {
+    currentId.value = 0;
+  }
+})
 
 </script>
 

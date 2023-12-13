@@ -1,3 +1,3 @@
 <template>
-  <div>No selection...</div>
+  <div class="text-xl italic">No Address Selected</div>
 </template>

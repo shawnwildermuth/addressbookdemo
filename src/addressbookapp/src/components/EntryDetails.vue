@@ -11,9 +11,9 @@ const props = defineProps<{
   id: Number
 }>();
 
-// onMounted(() => {
-//   currentEntry.value = store.getEntryById(props.id);
-// })
+onMounted(() => {
+  currentEntry.value = store.getEntryById(Number(props.id));
+})
 
 watch(() => props.id,
   () => {
