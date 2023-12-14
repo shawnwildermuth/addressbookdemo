@@ -2,6 +2,7 @@ import EntryDetailsVue from "@/components/EntryDetails.vue";
 import NoEntryVue from "@/components/NoEntry.vue";
 import { createRouter, createWebHistory, type RouteRecordRaw } from "vue-router";
 import { useStore } from "@/store";
+import EntryEditorVue from "@/components/EntryEditor.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     name: "editor",
     path: "/edit/:id",
-    component: EntryDetailsVue,
+    component: EntryEditorVue,
     props: route => ({ id: Number(route.params.id) }),
   },
   {

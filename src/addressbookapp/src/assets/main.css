@@ -3,3 +3,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+button {
+  @apply text-lg;
+}
+
+select, input {
+  @apply text-gray-900;
+}
