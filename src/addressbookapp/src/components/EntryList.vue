@@ -28,6 +28,7 @@ watch(router.currentRoute, () => {
 
 <template>
   <div class="border-r border-gray-200/50 py-2 px-1 text-gray-300 text-lg">
+    <div class="flex justify-start"><a href="/edit/-1" class="px-1 bg-blue-700 text-white rounded hover:bg-blue-500">New</a></div>
     <div class="flex flex-between">
       <input class="text-gray-900 focus:border-2" v-model="store.filter" /><button
         class="bg-gray-700 hover:gray-600" @click="store.filter = ''">x</button>

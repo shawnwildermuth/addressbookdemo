@@ -13,7 +13,13 @@ const routes: Array<RouteRecordRaw> = [
     name: "entry",
     path: "/details/:id",
     component: EntryDetailsVue,
-    props: true
+    props: route => ({ id: Number(route.params.id) }),
+  },
+  {
+    name: "editor",
+    path: "/edit/:id",
+    component: EntryDetailsVue,
+    props: route => ({ id: Number(route.params.id) }),
   },
   {
     name: "fallback",
