@@ -39,7 +39,7 @@ export default function () {
   });
   
   router.beforeEach(async (to) => {
-    await store.loadEntries();
+    await store.loadLookupList();
     if (!store.entries) {
       if (to.name !== "home" ) {
         return { name: "home" };

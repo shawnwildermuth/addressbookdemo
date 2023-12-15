@@ -28,8 +28,8 @@ const googleMapsLink = computed(() => {
   return `https://www.google.com/maps/place/${urlAddress.replace(" ", "+")}`;
 });
 
-function updateCurrentEntry() {
-  currentEntry.value = store.getEntryById(props.id);
+async function updateCurrentEntry() {
+  currentEntry.value = await store.getEntryById(props.id);
   currentAddress.value = currentEntry.value?.addresses[0] ?? undefined;
 }
 </script>

@@ -1,21 +1,20 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
 import { useStore } from "@/store";
-import type { BookEntryModel } from "@/models/bookEntryModel";
-import { formatName } from "@/formatters";
+import type { EntryLookupModel } from "@/models";
 import { useRouter } from "vue-router";
 
 const store = useStore();
 const router = useRouter();
 const currentId = ref(0);
 
-function onSelected(item: BookEntryModel) {
+function onSelected(item: EntryLookupModel) {
   router.push(`/details/${item.id}`);
   currentId.value = item.id;
 }
 
 onMounted(async () => {
-  await store.loadEntries();
+  await store.loadLookupList();
 })
 
 watch(router.currentRoute, () => {
@@ -36,8 +35,7 @@ watch(router.currentRoute, () => {
     <div v-for="e in store.entryList" :key="e.id">
       <div @click="onSelected(e)"
         class="p-1 bg-white/10 hover:bg-white/25 cursor-pointer mb-1 border border-transparent"
-        :class="{ 'border-yellow-300/50': currentId === e.id}">{{
-          formatName(e) }}</div>
+        :class="{ 'border-yellow-300/50': currentId === e.id}">{{ e.displayName }}</div>
     </div>
   </div>
 </template>

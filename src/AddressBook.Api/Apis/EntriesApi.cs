@@ -11,6 +11,8 @@ public class EntriesApi : IApi
   {
     var grp = builder.MapGroup("/api/book/entries");
 
+    grp.MapGet("lookup", GetLookup);
+
     grp.MapGet("", GetEntries);
 
     grp.MapGet("{id:int}", GetEntry);
@@ -22,6 +24,15 @@ public class EntriesApi : IApi
       .Validate<BookEntryModel>();
 
     grp.MapDelete("{id:int}", DeleteEntry);
+  }
+
+  public async static Task<IResult> GetLookup(IBookRepository repository)
+  {
+    var lookup = await repository.GetLookupEntries();
+
+    var results = lookup.Adapt<IEnumerable<BookEntryLookupModel>>();
+
+    return Results.Ok(results);
   }
 
   public static async Task<IResult> GetEntries(IBookRepository repository)

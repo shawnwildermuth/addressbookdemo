@@ -61,4 +61,20 @@ public class BookRepository(BookContext context) : IBookRepository
     return await context.SaveChangesAsync() > 0;
   }
 
+  public async Task<IEnumerable<BookEntry>> GetLookupEntries()
+  {
+    return await context.BookEntries
+      //.Where(b => b.UserName == Thread.CurrentPrincipal?.Identity?.Name)
+      .OrderBy(b => b.LastName)
+      .ThenBy(b => b.FirstName)
+      .Select(s => new BookEntry()
+      {
+        Id = s.Id,
+        FirstName = s.FirstName,
+        MiddleName = s.MiddleName,
+        LastName = s.LastName,
+        CompanyName = s.CompanyName
+      })
+      .ToListAsync();
+  }
 }

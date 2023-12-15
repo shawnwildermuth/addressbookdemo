@@ -10,6 +10,10 @@ Accept: application/json
 
 ###
 
+GET {{host}}/api/book/entries/lookup
+Accept: application/json
+
+###
 GET {{host}}/api/book/entries/40
 Accept: application/json
 

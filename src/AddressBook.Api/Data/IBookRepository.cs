@@ -5,6 +5,7 @@ namespace AddressBook.Api.Data
   {
     Task<IEnumerable<BookEntry>> GetAllEntries();
     Task<BookEntry?> GetEntry(int id);
+    Task<IEnumerable<BookEntry>> GetLookupEntries();
 
     Task<IEnumerable<Address>> GetAddressesForUser(int id);
     Task<Address?> GetAddressForUser(int id, int addressId);
