@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using AddressBook.Api.Validators;
 using Mapster;
+using Microsoft.AspNetCore.Mvc;
 using WilderMinds.MinimalApiDiscovery;
 
 namespace AddressBook.Api.Apis;
@@ -51,7 +52,7 @@ public class EntriesApi : IApi
     return Results.Ok(result.Adapt<BookEntryModel>());
   }
 
-  public static async Task<IResult> PostEntry(IBookRepository repository, BookEntryModel model)
+  public static async Task<IResult> PostEntry(IBookRepository repository, [FromBody]BookEntryModel model)
   {
     // Ignores attached addresses
     var entry = model.Adapt<BookEntry>();

@@ -8,7 +8,6 @@ public class BookEntryValidator : AbstractValidator<BookEntryModel>
   {
     RuleFor(b => b.FirstName).NotEmpty();
     RuleFor(b => b.LastName).NotEmpty();
-    RuleFor(b => b.DateOfBirth).NotEmpty();
 
   }
 }

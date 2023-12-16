@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import type { BookEntryModel } from '@/models/bookEntryModel';
+import type { BookEntryModel } from '@/models';
 import { useStore } from '@/store';
 import { onMounted, ref } from 'vue';
 import { cloneDeep } from "lodash";
 import { useRouter } from 'vue-router';
 import { entrySchema } from "@/schemas/BookEntry";
-import { type ZodErrorMap, type inferFormattedError } from "zod";
+import { type inferFormattedError } from "zod";
+import ValidationError from './ValidationError.vue';
 
 const store = useStore();
 
@@ -23,7 +24,15 @@ const errors = ref<ErrorsType | null>(null)
 
 onMounted(() => {
   if (props.id === -1) {// new
-    entry.value = {} as BookEntryModel;
+    entry.value = {
+      firstName: "Shawn",
+      lastName: "Wildermuth",
+      email: "shawn@aol.com",
+      gender: "Pick One...",
+      cellPhone: "",
+      homePhone: "",
+      workPhone: "",
+    };
   } else {
     const original = store.getEntryById(props.id);
     const copy = cloneDeep(original);
@@ -34,7 +43,12 @@ onMounted(() => {
 function save() {
   const result = entrySchema.safeParse(entry.value);
   if (result.success) {
-    console.log("ready to save");
+    // If New
+    if (props.id === -1) {
+      store.saveEntry(entry.value);
+    } else {
+      // update
+    }
   } else {
     errors.value = result.error.format();
   }
@@ -42,38 +56,51 @@ function save() {
 
 </script>
 <template>
-  <div class="flex flex-col" v-if="entry">
+  <div class="flex flex-col mx-36" v-if="entry">
     <label>Name</label>
     <div class="flex justify-stretch gap-1 flex-col md:flex-row">
-      <input placeholder="first name" v-model="entry.firstName" />
-      <input class="w-36" placeholder="middle name" v-model="entry.middleName" />
-      <input placeholder="last name" v-model="entry.lastName" />
-    </div>
-    <!-- Make Component Next -->
-    <div class="text-red-500" v-if="errors?.firstName">
-      <div v-for="e in errors.firstName._errors" :key="e">
-        {{ e }}
+      <div class="flex flex-col">
+        <input placeholder="first name" v-model="entry.firstName" />
+        <ValidationError :errors="errors" fieldName="firstName" />
+      </div>
+      <div class="flex flex-col">
+        <input class="w-36" placeholder="middle name"
+          v-model="entry.middleName" />
+          <ValidationError :errors="errors" fieldName="middleName" />
+      </div>
+      <div class="flex flex-col">
+        <input placeholder="last name" v-model="entry.lastName" />
+        <ValidationError :errors="errors" fieldName="lastName" />
       </div>
     </div>
     <label>Email</label>
     <input placeholder="e.g. you@us.net" v-model="entry.email" />
+    <ValidationError :errors="errors" fieldName="email" />
     <label>Company Name</label>
     <input placeholder="e.g. My Company, LLC" v-model="entry.companyName" />
+    <ValidationError :errors="errors" fieldName="companyName" />
     <label>Home Phone</label>
     <input placeholder="e.g. +1 404 227 3030" v-model="entry.homePhone" />
+    <ValidationError :errors="errors" fieldName="homePhone" />
     <label>Work Phone</label>
     <input placeholder="e.g. +1 404 227 3030" v-model="entry.workPhone" />
+    <ValidationError :errors="errors" fieldName="workPhone" />
     <label>Cell Phone</label>
     <input placeholder="e.g. +1 404 227 3030" v-model="entry.cellPhone" />
+    <ValidationError :errors="errors" fieldName="cellPhone" />
     <label>Gender</label>
     <select class="" v-model="entry.gender">
-      <option>Select One...</option>
+      <option selected value="">Select One...</option>
       <option>Male</option>
       <option>Female</option>
       <option>Non-binary</option>
       <option>Intersex</option>
       <option>Other</option>
     </select>
+    <ValidationError :errors="errors" fieldName="gender" />
+    <label>Birthdate</label>
+    <input placeholder="2000-01-01" v-model="entry.dateOfBirth" />
+    <ValidationError :errors="errors" fieldName="dateOfBirth" />
     <div class="flex justify-end">
       <button @click="save">Save</button>
       <button class="bg-gray-500 hover:bg-gray-700"
