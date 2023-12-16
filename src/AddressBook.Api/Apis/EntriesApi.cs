@@ -52,7 +52,7 @@ public class EntriesApi : IApi
     return Results.Ok(result.Adapt<BookEntryModel>());
   }
 
-  public static async Task<IResult> PostEntry(IBookRepository repository, [FromBody]BookEntryModel model)
+  public static async Task<IResult> PostEntry(IBookRepository repository, BookEntryModel model)
   {
     // Ignores attached addresses
     var entry = model.Adapt<BookEntry>();
