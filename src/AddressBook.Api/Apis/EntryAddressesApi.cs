@@ -4,7 +4,7 @@ using WilderMinds.MinimalApiDiscovery;
 
 namespace AddressBook.Api.Apis;
 
-public class AddressesApi : IApi
+public class EntryAddressesApi : IApi
 {
   public void Register(IEndpointRouteBuilder builder)
   {

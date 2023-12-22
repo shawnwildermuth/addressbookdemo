@@ -58,7 +58,7 @@ async function save() {
     let success = false;
     // If New
     if (props.id === -1) {
-      const newId = await store.saveEntry(entry.value);
+      const newId = await store.saveEntry(entry.value!);
       if (newId) id = newId;
       success = true;
     } else {

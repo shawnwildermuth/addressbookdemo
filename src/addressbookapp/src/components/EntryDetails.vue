@@ -3,12 +3,13 @@ import { useStore } from '@/store';
 import { onMounted, ref, watch } from 'vue';
 import type { EntryModel, AddressModel } from '@/models';
 import { formatName } from "@/formatters";
-import ModalDialog from "@/components/ModalDialog.vue";
 import { useRouter } from 'vue-router';
+import ConfirmationDialog from "@/components/ConfirmationDialog.vue";
+import AddressComponent from "@/components/AddressComponent.vue";
 
 const store = useStore();
 const currentEntry = ref<EntryModel | undefined>();
-const confirmDialog = ref<typeof ModalDialog | null>(null);
+const confirmDialog = ref<typeof ConfirmationDialog>();
 const router = useRouter();
 
 const props = defineProps<{
@@ -24,26 +25,27 @@ watch(() => props.id,
     updateCurrentEntry();
   });
 
-function getGoogleMapsLink(address: AddressModel) {
-  const urlAddress = `${address.line1},+${address.cityTown},+${address.stateProvince}+${address.postalCode}+${address.country}`;
-  return `https://www.google.com/maps/place/${urlAddress.replace(" ", "+")}`;
-}
-
 async function updateCurrentEntry() {
   currentEntry.value = await store.getEntryById(props.id);
 }
 
 function deleteEntry() {
-  confirmDialog.value?.show();
+  confirmDialog.value?.showModal();
 }
 
 function editEntry() {
   router.push(`/edit/${currentEntry.value?.id}`);
 }
 
-function handleClose(confirm: boolean) {
-  store.deleteEntry(currentEntry.value!);
-  router.push("/");
+function confirmDelete(confirm: boolean) {
+  if (confirm) {
+    store.deleteEntry(currentEntry.value!);
+    router.push("/");
+  }
+}
+
+function newAddress() {
+
 }
 </script>
 
@@ -76,35 +78,25 @@ function handleClose(confirm: boolean) {
         currentEntry?.email }}</a></div>
       <div v-if="currentEntry?.gender">{{ currentEntry?.gender }}</div>
       <div v-if="currentEntry?.addresses && currentEntry?.addresses.length > 0"
-        class="ml-4 mr-2 my-2">
-        <div class=" p-2">
-          <h3>Addresses</h3>
+           class="ml-4 mr-2 my-2">
+        <div class="p-2">
           <div>
-            <div v-for="a in currentEntry?.addresses" :key="a.id"
-              class=" text-lg mr-2 my-2 border-b border-gray-200">
-              <div class="text-xl italic mb-2">{{ a.name }}</div>
-              <div>{{ a.line1 }}</div>
-              <div v-if="a.line2">{{ a.line2 }}</div>
-              <div v-if="a.line3">{{ a.line3 }}</div>
-              <div v-if="a.cityTown">{{ a.cityTown }},
-                {{ a.stateProvince }} {{ a.postalCode }}
-              </div>
-              <div v-if="a.country">{{ a.country }}</div>
-              <div><a :href="getGoogleMapsLink(a)" target="_blank">Map</a></div>
-            </div>
+            <h3>Addresses</h3>
+            <button class="ml-0 p-2 text-sm" @click="newAddress">New Address</button>
+          </div>
+          <div>
+            <address-component v-for="address in currentEntry?.addresses" 
+                               :key="address.id" 
+                               :address="address"
+                               :entry="currentEntry">
+            </address-component>
           </div>
         </div>
       </div>
+
     </div>
   </div>
-  <modal-dialog title="Are you sure?" 
-    ref="confirmDialog"
-    confirm-button-text="Yes"
-    @close="handleClose">
-    <div>Please confirm your choice.</div>
-  </modal-dialog>
+  <confirmation-dialog @close="confirmDelete" ref="confirmDialog">
+  </confirmation-dialog>
 </template>
 
-<style scoped>a {
-  @apply text-blue-300 hover:underline;
-}</style>

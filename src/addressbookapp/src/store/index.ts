@@ -105,17 +105,63 @@ export const useStore = defineStore("main", {
           (a.displayName > b.displayName ? 1 : 0)
       });
     },
-    async getAddressById(entryId: Number, id: Number) {
+    async getAddressById(entry: EntryModel, id: Number) {
       try {
         this.startRequest();
-        const result = await http.get<AddressModel>(`/api/book/entries/${entryId}/addresses/${id}`);
+        const result = await http.get<AddressModel>(`/api/book/entries/${entry.id}/addresses/${id}`);
         return result;
       } catch (e: any) {
         this.errorMessage = e;
       } finally {
         this.isBusy = false;
       }
-    }
+    },
+    async saveAddress(entry: EntryModel, data: AddressModel) {
+      try {
+        this.startRequest();
+        const result = await http.post<AddressModel>(`/api/book/entries/${entry.id}/addresses/`, data);
+        entry.addresses.push(result);
+        return result.id;
+      } catch (e: any) {
+        this.errorMessage = e;
+      } finally {
+        this.isBusy = false;
+      }
+      return null;
+    },
+    async updateAddress(entry: EntryModel, data: AddressModel) {
+      try {
+        this.startRequest();
+        const result = await http.put<AddressModel>(`/api/book/entries/${entry.id}/addresses/${data.id}`, 
+          data);
+        entry.addresses.splice(entry.addresses.findIndex(a => a.id == data.id), 1);
+        entry.addresses.push(result);
+        return result.id;
+      } catch (e: any) {
+        this.errorMessage = e;
+      } finally {
+        this.isBusy = false;
+      }
+      return null;
+    },
+    async deleteAddress(entry: EntryModel, data: AddressModel) {
+      try {
+        this.startRequest();
+        const result = await http.deleteItem(`/api/book/entries/${entry.id}/addresses/${data.id}`);
+        if (result) {
+          entry.addresses.splice(entry.addresses.findIndex(a => a.id == data.id), 1);
+        } else {
+          this.errorMessage = "Failed to delete an address";
+        }
+        this.sortEntities();
+        return true;
+      } catch (e: any) {
+        this.errorMessage = e;
+      } finally {
+        this.isBusy = false;
+      }
+      return null;
+    },
   },
   getters: {
     entryList: (state) => {

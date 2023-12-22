@@ -3,9 +3,11 @@ import { ref } from "vue";
 
 withDefaults(defineProps<{
   title: string,
-  confirmButtonText: string
+  confirmButtonText: string,
+  enableConfirmButton: boolean
 }>(), {
-  confirmButtonText: "Ok"
+  confirmButtonText: "Ok",
+  enableConfirmButton: true
 });
 
 const emit = defineEmits<{
@@ -14,7 +16,7 @@ const emit = defineEmits<{
 
 const theDialog = ref<HTMLDialogElement | null>(null);
 
-function show() {
+function showModal() {
   theDialog.value?.showModal();
 }
 
@@ -24,7 +26,8 @@ function closeDialog(success: boolean) {
 }
 
 defineExpose({
-  show
+  showModal,
+  closeDialog
 });
 </script>
 
@@ -32,7 +35,7 @@ defineExpose({
 <template>
   <dialog ref="theDialog">
     <div class="fixed inset-0 flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg shadow-lg p-2">
+      <div class="bg-slate-700 text-white rounded-lg shadow-lg p-2">
         <div class="flex justify-between text-lg mb-2">
           <div class="font-bold">{{ title }}</div>
           <div @click="closeDialog(false)"
@@ -43,7 +46,7 @@ defineExpose({
         </div>
         <div class="flex justify-end"><button
             @click="closeDialog(false)" class="text-sm p-2 bg-gray-500 hover:bg-gray-900">Cancel</button><button
-            @click="closeDialog(true)"  class="text-sm p-2">{{ confirmButtonText }}</button></div>
+            @click="closeDialog(true)" :disabled="!enableConfirmButton" class="text-sm p-2">{{ confirmButtonText }}</button></div>
       </div>
     </div>
   </dialog>
