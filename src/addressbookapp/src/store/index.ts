@@ -50,11 +50,49 @@ export const useStore = defineStore("main", {
           displayName: formatName(result),
         });
         this.sortEntities();
+        return result.id;
       } catch (e: any) {
         this.errorMessage = e;
       } finally {
         this.isBusy = false;
       }
+      return null;
+    },
+    async updateEntry(data: EntryModel) {
+      try {
+        this.isBusy = true;
+        const result = await http.put<EntryModel>("/api/book/entries", data);
+        this.entries.splice(this.entries.findIndex(e => e.id == data.id), 1);
+        this.entries.push({
+          id: result.id,
+          displayName: formatName(result),
+        });
+        this.sortEntities();
+        return result.id;
+      } catch (e: any) {
+        this.errorMessage = e;
+      } finally {
+        this.isBusy = false;
+      }
+      return null;
+    },
+    async deleteEntry(data: EntryModel) {
+      try {
+        this.isBusy = true;
+        const result = await http.deleteItem(`/api/book/entries/${data.id}`);
+        if (result) {
+          this.entries.splice(this.entries.findIndex(e => e.id == data.id), 1);
+        } else {
+          this.errorMessage = "Failed to delete an entry";
+        }
+        this.sortEntities();
+        return true;
+      } catch (e: any) {
+        this.errorMessage = e;
+      } finally {
+        this.isBusy = false;
+      }
+      return null;
     },
     sortEntities() {
       this.entries.sort((a, b) => {

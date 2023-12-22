@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BookEntryModel } from '@/models';
+import type { EntryModel } from '@/models';
 import { useStore } from '@/store';
 import { onMounted, ref } from 'vue';
 import { cloneDeep } from "lodash";
@@ -16,22 +16,27 @@ const props = defineProps<{
   id: Number
 }>();
 
-const entry = ref<BookEntryModel>();
+const entry = ref<EntryModel>();
 
 type ErrorsType = inferFormattedError<typeof entrySchema>;
 
-const errors = ref<ErrorsType | null>(null)
+const errors = ref<ErrorsType>();
 
 onMounted(() => {
   if (props.id === -1) {// new
     entry.value = {
+      id: 0,
       firstName: "Shawn",
+      middleName: "",
       lastName: "Wildermuth",
       email: "shawn@aol.com",
       gender: "Pick One...",
+      dateOfBirth: "",
       cellPhone: "",
       homePhone: "",
       workPhone: "",
+      companyName: "",
+      addresses: [],
     };
   } else {
     const original = store.getEntryById(props.id);
@@ -40,15 +45,18 @@ onMounted(() => {
   }
 });
 
-function save() {
+async function save() {
   const result = entrySchema.safeParse(entry.value);
   if (result.success) {
+    let id = props.id;
     // If New
     if (props.id === -1) {
-      store.saveEntry(entry.value);
+      const newId = await store.saveEntry(entry.value!);
+      if (newId) id = newId;
     } else {
       // update
     }
+    router.push({ name: "entry", params: { id: id.toString() }})
   } else {
     errors.value = result.error.format();
   }
