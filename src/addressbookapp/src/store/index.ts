@@ -1,7 +1,8 @@
 import http from '@/http';
 import {
   type EntryModel,
-  type EntryLookupModel
+  type EntryLookupModel,
+  type AddressModel
 } from '@/models';
 import { defineStore } from "pinia"
 import { formatName } from '@/formatters';
@@ -16,10 +17,14 @@ export const useStore = defineStore("main", {
     };
   },
   actions: {
+    startRequest() {
+      this.isBusy = true;
+      this.errorMessage = "";
+    },
     async loadLookupList() {
       if (this.entries.length === 0) {
         try {
-          this.isBusy = true;
+          this.startRequest();
           const result = await http.get<Array<EntryLookupModel>>("/api/book/entries/lookup");
           this.entries.splice(0, this.entries.length, ...result);
           this.sortEntities();
@@ -32,7 +37,7 @@ export const useStore = defineStore("main", {
     },
     async getEntryById(id: Number) {
       try {
-        this.isBusy = true;
+        this.startRequest();
         const result = await http.get<EntryModel>(`/api/book/entries/${id}`);
         return result;
       } catch (e: any) {
@@ -43,7 +48,7 @@ export const useStore = defineStore("main", {
     },
     async saveEntry(data: EntryModel) {
       try {
-        this.isBusy = true;
+        this.startRequest();
         const result = await http.post<EntryModel>("/api/book/entries", data);
         this.entries.push({
           id: result.id,
@@ -60,8 +65,8 @@ export const useStore = defineStore("main", {
     },
     async updateEntry(data: EntryModel) {
       try {
-        this.isBusy = true;
-        const result = await http.put<EntryModel>("/api/book/entries", data);
+        this.startRequest();
+        const result = await http.put<EntryModel>(`/api/book/entries/${data.id}`, data);
         this.entries.splice(this.entries.findIndex(e => e.id == data.id), 1);
         this.entries.push({
           id: result.id,
@@ -78,7 +83,7 @@ export const useStore = defineStore("main", {
     },
     async deleteEntry(data: EntryModel) {
       try {
-        this.isBusy = true;
+        this.startRequest();
         const result = await http.deleteItem(`/api/book/entries/${data.id}`);
         if (result) {
           this.entries.splice(this.entries.findIndex(e => e.id == data.id), 1);
@@ -99,6 +104,17 @@ export const useStore = defineStore("main", {
         return a.displayName < b.displayName ? -1 :
           (a.displayName > b.displayName ? 1 : 0)
       });
+    },
+    async getAddressById(entryId: Number, id: Number) {
+      try {
+        this.startRequest();
+        const result = await http.get<AddressModel>(`/api/book/entries/${entryId}/addresses/${id}`);
+        return result;
+      } catch (e: any) {
+        this.errorMessage = e;
+      } finally {
+        this.isBusy = false;
+      }
     }
   },
   getters: {

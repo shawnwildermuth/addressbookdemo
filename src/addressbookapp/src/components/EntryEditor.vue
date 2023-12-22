@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { EntryModel } from '@/models';
 import { useStore } from '@/store';
-import { onMounted, ref } from 'vue';
+import { onMounted, reactive, ref, watch } from 'vue';
 import { cloneDeep } from "lodash";
 import { useRouter } from 'vue-router';
-import { entrySchema } from "@/schemas/BookEntry";
+import { entrySchema } from "@/schemas/bookEntry";
 import { type inferFormattedError } from "zod";
 import ValidationError from './ValidationError.vue';
 
@@ -17,12 +17,13 @@ const props = defineProps<{
 }>();
 
 const entry = ref<EntryModel>();
+const isDirty = ref(false);
 
 type ErrorsType = inferFormattedError<typeof entrySchema>;
 
 const errors = ref<ErrorsType>();
 
-onMounted(() => {
+onMounted(async () => {
   if (props.id === -1) {// new
     entry.value = {
       id: 0,
@@ -39,24 +40,38 @@ onMounted(() => {
       addresses: [],
     };
   } else {
-    const original = store.getEntryById(props.id);
-    const copy = cloneDeep(original);
+    const original = await store.getEntryById(props.id);
+    if (!original) router.push("/"); 
+    const copy = cloneDeep(original) as EntryModel;
     entry.value = copy;
   }
 });
+
+function onChange() {
+  isDirty.value = true;
+}
 
 async function save() {
   const result = entrySchema.safeParse(entry.value);
   if (result.success) {
     let id = props.id;
+    let success = false;
     // If New
     if (props.id === -1) {
-      const newId = await store.saveEntry(entry.value!);
+      const newId = await store.saveEntry(entry.value);
       if (newId) id = newId;
+      success = true;
     } else {
       // update
+      if (await store.updateEntry(entry.value!)) {
+        success = true;
+      } else {
+        store.errorMessage = "Failed to update entry.";
+      } 
     }
-    router.push({ name: "entry", params: { id: id.toString() }})
+    if (success) {
+      router.push({ name: "entry", params: { id: id.toString() } });
+    }
   } else {
     errors.value = result.error.format();
   }
@@ -64,40 +79,40 @@ async function save() {
 
 </script>
 <template>
-  <div class="flex flex-col mx-36" v-if="entry">
+  <div class="flex flex-col mx-0 lg:mx-36" v-if="entry">
     <label>Name</label>
     <div class="flex justify-stretch gap-1 flex-col md:flex-row">
       <div class="flex flex-col">
-        <input placeholder="first name" v-model="entry.firstName" />
+        <input placeholder="first name" v-model="entry.firstName" @input="onChange" />
         <ValidationError :errors="errors" fieldName="firstName" />
       </div>
       <div class="flex flex-col">
         <input class="w-36" placeholder="middle name"
-          v-model="entry.middleName" />
-          <ValidationError :errors="errors" fieldName="middleName" />
+          v-model="entry.middleName" @input="onChange"  />
+        <ValidationError :errors="errors" fieldName="middleName" />
       </div>
       <div class="flex flex-col">
-        <input placeholder="last name" v-model="entry.lastName" />
+        <input placeholder="last name" v-model="entry.lastName" @input="onChange"  />
         <ValidationError :errors="errors" fieldName="lastName" />
       </div>
     </div>
     <label>Email</label>
-    <input placeholder="e.g. you@us.net" v-model="entry.email" />
+    <input placeholder="e.g. you@us.net" v-model="entry.email" @input="onChange"  />
     <ValidationError :errors="errors" fieldName="email" />
     <label>Company Name</label>
-    <input placeholder="e.g. My Company, LLC" v-model="entry.companyName" />
+    <input placeholder="e.g. My Company, LLC" v-model="entry.companyName" @input="onChange"  />
     <ValidationError :errors="errors" fieldName="companyName" />
     <label>Home Phone</label>
-    <input placeholder="e.g. +1 404 227 3030" v-model="entry.homePhone" />
+    <input placeholder="e.g. +1 404 227 3030" v-model="entry.homePhone" @input="onChange"  />
     <ValidationError :errors="errors" fieldName="homePhone" />
     <label>Work Phone</label>
-    <input placeholder="e.g. +1 404 227 3030" v-model="entry.workPhone" />
+    <input placeholder="e.g. +1 404 227 3030" v-model="entry.workPhone" @input="onChange"  />
     <ValidationError :errors="errors" fieldName="workPhone" />
     <label>Cell Phone</label>
-    <input placeholder="e.g. +1 404 227 3030" v-model="entry.cellPhone" />
+    <input placeholder="e.g. +1 404 227 3030" v-model="entry.cellPhone" @input="onChange"  />
     <ValidationError :errors="errors" fieldName="cellPhone" />
     <label>Gender</label>
-    <select class="" v-model="entry.gender">
+    <select class="" v-model="entry.gender" @input="onChange"  >
       <option selected value="">Select One...</option>
       <option>Male</option>
       <option>Female</option>
@@ -107,13 +122,13 @@ async function save() {
     </select>
     <ValidationError :errors="errors" fieldName="gender" />
     <label>Birthdate</label>
-    <input placeholder="2000-01-01" v-model="entry.dateOfBirth" />
+    <input placeholder="2000-01-01" v-model="entry.dateOfBirth" @input="onChange"  />
     <ValidationError :errors="errors" fieldName="dateOfBirth" />
     <div class="flex justify-end">
-      <button @click="save">Save</button>
+      <button @click="save" :disabled="!isDirty">Save</button>
       <button class="bg-gray-500 hover:bg-gray-700"
         @click="router.push('/')">Cancel</button>
     </div>
   </div>
   <pre>{{ entry }}</pre>
-</template>
+</template>@/schemas/bookEntry

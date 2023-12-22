@@ -38,6 +38,7 @@ function deleteEntry() {
 }
 
 function editEntry() {
+  router.push(`/edit/${currentEntry.value?.id}`);
 }
 
 function handleClose(confirm: boolean) {

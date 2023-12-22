@@ -82,6 +82,10 @@ public class EntriesApi : IApi
       {
         return Results.Ok(entry.Adapt<BookEntryModel>());
       }
+      else
+      {
+        return Results.Problem("No changes made");
+      }
     }
 
     return Results.NotFound();
