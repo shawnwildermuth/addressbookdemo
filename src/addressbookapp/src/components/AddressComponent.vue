@@ -16,11 +16,11 @@ const props = defineProps<{
 }>();
 
 function editAddress() {
-  addressDialog.value.showModal();
+  addressDialog.value!.showModal();
 }
 
 function deleteAddress() {
-  confirmDialog.value.showModal();
+  confirmDialog.value!.showModal();
 }
 
 function getGoogleMapsLink() {
@@ -32,10 +32,6 @@ function confirmDelete(confirm: boolean) {
   if (confirm) {
     store.deleteAddress(props.entry, props.address);  
   }
-}
-
-function confirmSave(confirm: boolean) {
-
 }
 
 </script>
@@ -61,8 +57,7 @@ function confirmSave(confirm: boolean) {
   </div>
   <confirmation-dialog @close="confirmDelete" ref="confirmDialog">
   </confirmation-dialog>
-  <address-dialog ref="addressDialog" @close="confirmSave" :address="address" :entry="entry">
-
+  <address-dialog ref="addressDialog" :address="address" :entry="entry">
   </address-dialog>
 </template>
 

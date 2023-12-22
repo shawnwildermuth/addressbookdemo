@@ -6,10 +6,12 @@ import { formatName } from "@/formatters";
 import { useRouter } from 'vue-router';
 import ConfirmationDialog from "@/components/ConfirmationDialog.vue";
 import AddressComponent from "@/components/AddressComponent.vue";
+import AddressDialog from './AddressDialog.vue';
 
 const store = useStore();
 const currentEntry = ref<EntryModel | undefined>();
 const confirmDialog = ref<typeof ConfirmationDialog>();
+const addressDialog = ref<typeof AddressDialog>()
 const router = useRouter();
 
 const props = defineProps<{
@@ -45,7 +47,7 @@ function confirmDelete(confirm: boolean) {
 }
 
 function newAddress() {
-
+  addressDialog.value!.showModal();
 }
 </script>
 
@@ -98,5 +100,8 @@ function newAddress() {
   </div>
   <confirmation-dialog @close="confirmDelete" ref="confirmDialog">
   </confirmation-dialog>
+  <address-dialog ref="addressDialog" :entry="currentEntry!" :address="null">
+  </address-dialog>
+
 </template>
 
