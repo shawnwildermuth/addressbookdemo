@@ -4,8 +4,15 @@ export default {
     "./src/**/*.{vue,ts,js}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'sans': ['Noto Sans', 'sans-serif']
+      }
+    },
   },
-  plugins: [require("@shawnwildermuth/sanewind")],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["forest"],
+  }
 }
 

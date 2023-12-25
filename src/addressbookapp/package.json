@@ -12,7 +12,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@shawnwildermuth/sanewind": "^1.0.7",
+    "@heroicons/vue": "^2.1.1",
+    "@vuepic/vue-datepicker": "^7.4.0",
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.2",
     "lodash": "^4.17.21",
@@ -32,6 +33,7 @@
     "@vitejs/plugin-vue": "^4.5.1",
     "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/tsconfig": "^0.4.0",
+    "daisyui": "^4.4.23",
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",
     "npm-run-all2": "^6.1.1",
