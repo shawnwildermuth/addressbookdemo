@@ -37,15 +37,17 @@ function confirmDelete(confirm: boolean) {
 </script>
 
 <template>
-  <div v-if="address" class="text-lg mr-2 my-2 bg-gray-500/25 hover:bg-gray-400/25 p-1">
-    <div class="flex justify-between">
-      <div class="text-xl italic mb-2">{{ address.name }}</div>
+  <div v-if="address" class="card my-4 rounded">
+    <div class="card-body bg-base-300 shadow-xl hover:bg-base-200">
+    <div class="flex justify-between card-title">
+      <div class="text-md mb-2">{{ address.name }}</div>
       <div>
         <button @click="deleteAddress"
-          class="bg-amber-900 hover:bg-amber-700 text-sm">Delete</button>
-        <button @click="editAddress" class="text-sm">Edit</button>
+          class="btn btn-xs btn-warning mr-1">Delete</button>
+        <button @click="editAddress" class="btn btn-xs btn-primary">Edit</button>
       </div>
     </div>
+    <div class="flex flex-col text-sm">
     <div>{{ address.line1 }}</div>
     <div v-if="address.line2">{{ address.line2 }}</div>
     <div v-if="address.line3">{{ address.line3 }}</div>
@@ -54,6 +56,8 @@ function confirmDelete(confirm: boolean) {
     </div>
     <div v-if="address.country">{{ address.country }}</div>
     <div><a :href="getGoogleMapsLink" target="_blank">Map</a></div>
+  </div>
+  </div>
   </div>
   <confirmation-dialog @close="confirmDelete" ref="confirmDialog">
   </confirmation-dialog>

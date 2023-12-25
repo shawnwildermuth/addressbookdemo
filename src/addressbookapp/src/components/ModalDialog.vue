@@ -3,8 +3,8 @@ import { ref } from "vue";
 
 withDefaults(defineProps<{
   title: string,
-  confirmButtonText: string,
-  enableConfirmButton: boolean
+  confirmButtonText?: string,
+  enableConfirmButton?: boolean
 }>(), {
   confirmButtonText: "Ok",
   enableConfirmButton: true
