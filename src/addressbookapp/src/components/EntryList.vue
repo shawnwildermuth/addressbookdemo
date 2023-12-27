@@ -16,6 +16,7 @@ function onSelected(item: EntryLookupModel) {
 
 onMounted(async () => {
   await store.loadLookupList();
+  onSelected(store.entries[0]);
 })
 
 watch(router.currentRoute, () => {
@@ -45,9 +46,6 @@ watch(router.currentRoute, () => {
       :class="{ 'text-white': currentId === e.id, 'font-bold': currentId === e.id }"            
             >{{ e.displayName
             }}</div>
-
-            <!-- class="p-1 bg-white/10 hover:bg-white/25 cursor-pointer mb-1 border border-transparent"
-            :class="{ 'border-yellow-300/50': currentId === e.id }" -->
         </li>
       </ul>
     </div>
