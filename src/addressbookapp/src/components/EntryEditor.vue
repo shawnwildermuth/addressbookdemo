@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router';
 import { entrySchema } from "@/schemas/bookEntry";
 import { type inferFormattedError } from "zod";
 import ValidationError from './ValidationError.vue';
+import DatePicker from "vue-tailwind-datepicker";
 
 const store = useStore();
 
@@ -51,6 +52,14 @@ function onChange() {
   isDirty.value = true;
 }
 
+function cancel() {
+  if (props.id > 0) {
+  router.push(`/details/${props.id}`);
+  } else {
+    router.push("/");
+  }
+}
+
 async function save() {
   const result = entrySchema.safeParse(entry.value);
   if (result.success) {
@@ -79,41 +88,75 @@ async function save() {
 
 </script>
 <template>
-  <div class="flex flex-col mx-0 lg:mx-36" v-if="entry">
-    <label>Name</label>
+  <div class="flex flex-col w-full lg:w-4/5 mx-auto rounded text-lg p-2 shadow-lg my-4 bg-neutral" v-if="entry">
+    <h2 class="text-2xl font-bold mb-2">Edit Address</h2>
+    <div class="label">
+      <span class="label-text font-bold">
+      Name
+      </span>
+    </div>
     <div class="flex justify-stretch gap-1 flex-col md:flex-row">
-      <div class="flex flex-col">
-        <input placeholder="first name" v-model="entry.firstName" @input="onChange" />
+      <div class="flex flex-col lg:w-2/5">
+        <input class="input input-bordered input-primary" placeholder="first name" v-model="entry.firstName" @input="onChange" />
         <ValidationError :errors="errors" fieldName="firstName" />
       </div>
-      <div class="flex flex-col">
-        <input class="w-36" placeholder="middle name"
+      <div class="flex flex-col lg:w-1/5">
+        <input class="input" placeholder="middle name"
           v-model="entry.middleName" @input="onChange"  />
         <ValidationError :errors="errors" fieldName="middleName" />
       </div>
-      <div class="flex flex-col">
-        <input placeholder="last name" v-model="entry.lastName" @input="onChange"  />
+      <div class="flex flex-col lg:w-2/5">
+        <input class="input" placeholder="last name" v-model="entry.lastName" @input="onChange"  />
         <ValidationError :errors="errors" fieldName="lastName" />
       </div>
     </div>
-    <label>Email</label>
-    <input placeholder="e.g. you@us.net" v-model="entry.email" @input="onChange"  />
+    <div class="label">
+      <span class="label-text font-bold">
+        Email      
+      </span>
+    </div>
+    <input class="input" placeholder="e.g. you@us.net" v-model="entry.email" @input="onChange"  />
     <ValidationError :errors="errors" fieldName="email" />
-    <label>Company Name</label>
-    <input placeholder="e.g. My Company, LLC" v-model="entry.companyName" @input="onChange"  />
+
+    <div class="label">
+      <span class="label-text font-bold">
+        Company Name
+      </span>
+    </div>
+    <input class="input" placeholder="e.g. My Company, LLC" v-model="entry.companyName" @input="onChange"  />
     <ValidationError :errors="errors" fieldName="companyName" />
-    <label>Home Phone</label>
-    <input placeholder="e.g. +1 404 227 3030" v-model="entry.homePhone" @input="onChange"  />
+
+    <div class="label">
+      <span class="label-text font-bold">
+        Home Phone
+      </span>
+    </div>
+    <input class="input" placeholder="e.g. +1 404 227 3030" v-model="entry.homePhone" @input="onChange"  />
     <ValidationError :errors="errors" fieldName="homePhone" />
-    <label>Work Phone</label>
-    <input placeholder="e.g. +1 404 227 3030" v-model="entry.workPhone" @input="onChange"  />
+
+    <div class="label">
+      <span class="label-text font-bold">
+        Work Phone
+      </span> 
+    </div>
+    <input class="input" placeholder="e.g. +1 404 227 3030" v-model="entry.workPhone" @input="onChange"  />
     <ValidationError :errors="errors" fieldName="workPhone" />
-    <label>Cell Phone</label>
-    <input placeholder="e.g. +1 404 227 3030" v-model="entry.cellPhone" @input="onChange"  />
+
+    <div class="label">
+      <span class="label-text font-bold">
+        Cell Phone
+      </span>
+    </div>
+    <input class="input" placeholder="e.g. +1 404 227 3030" v-model="entry.cellPhone" @input="onChange"  />
     <ValidationError :errors="errors" fieldName="cellPhone" />
-    <label>Gender</label>
-    <select class="" v-model="entry.gender" @input="onChange"  >
-      <option selected value="">Select One...</option>
+
+    <div class="label">
+      <span class="label-text font-bold">
+        Gender
+      </span>
+    </div>
+    <select class="select" v-model="entry.gender" @input="onChange"  >
+      <option disabled selected value="">Select One...</option>
       <option>Male</option>
       <option>Female</option>
       <option>Non-binary</option>
@@ -121,14 +164,20 @@ async function save() {
       <option>Other</option>
     </select>
     <ValidationError :errors="errors" fieldName="gender" />
-    <label>Birthdate</label>
-    <input placeholder="2000-01-01" v-model="entry.dateOfBirth" @input="onChange"  />
+
+    <div class="label">
+      <span class="label-text font-bold">
+        Birthdate
+      </span>
+    </div>
+
+    <date-picker class="dark" input-classes="input" as-single placeholder="2000-01-01" v-model="entry.dateOfBirth" @input="onChange"  />
     <ValidationError :errors="errors" fieldName="dateOfBirth" />
-    <div class="flex justify-end">
-      <button @click="save" :disabled="!isDirty">Save</button>
-      <button class="bg-gray-500 hover:bg-gray-700"
-        @click="router.push('/')">Cancel</button>
+
+    <div class="flex justify-end mt-2">
+      <button class="btn"
+        @click="cancel">Cancel</button>
+      <button class="btn btn-primary" @click="save" :disabled="!isDirty">Save</button>
     </div>
   </div>
-  <pre>{{ entry }}</pre>
-</template>@/schemas/bookEntry
+</template>

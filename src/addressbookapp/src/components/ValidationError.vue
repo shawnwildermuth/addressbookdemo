@@ -18,9 +18,11 @@ const errorItems = computed(() => {
 </script>
 
 <template>
-  <div class="text-red-500 italic " v-if="errorItems">
+  <div class="label">
+  <div class="label-text text-red-400" v-if="errorItems">
     <div v-for="e in errorItems" :key="e">
       {{ e }}
     </div>
   </div>
+</div>
 </template>

@@ -45,8 +45,8 @@ defineExpose({
           <slot></slot>
         </div>
         <div class="flex justify-end"><button
-            @click="closeDialog(false)" class="text-sm p-2 bg-gray-500 hover:bg-gray-900">Cancel</button><button
-            @click="closeDialog(true)" :disabled="!enableConfirmButton" class="text-sm p-2">{{ confirmButtonText }}</button></div>
+            @click="closeDialog(false)" class="btn">Cancel</button><button
+            @click="closeDialog(true)" :disabled="!enableConfirmButton" class="btn btn-primary">{{ confirmButtonText }}</button></div>
       </div>
     </div>
   </dialog>

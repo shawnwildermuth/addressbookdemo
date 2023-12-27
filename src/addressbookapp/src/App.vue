@@ -13,7 +13,7 @@ function toggleSidebar() {
 </script>
 
 <template>
-  <div class="w-full bg-base-100 text-gray-100 h-screen font-light flex" data-theme="business" >
+  <div class="dark w-full bg-base-100 text-gray-100 h-screen font-light flex" data-theme="business">
     <section id="sidebar" class="bg-neutral/50 w-80 p-2 transition-all ease-in-out duration-500" :class="{ '-ml-[18rem]': !showSidebar }">
       <div class="flex justify-between w-full">
         <h1 class="text-2xl font-bold"><router-link to="/">Your Address

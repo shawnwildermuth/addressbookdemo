@@ -73,35 +73,35 @@ defineExpose({
 <template>
   <modal-dialog ref="theDialog" title="Address" confirm-button-text="Save"
     @close="onSave" :enableConfirmButton="dirty">
-    <div v-if="address" class="w-96">
-      <label>Address Name</label>
-      <input placeholder="e.g. Home" v-model="address.name"
+    <div v-if="address" class="w-96" >
+      <div class="label">Address Name</div>
+      <input class="input w-full" placeholder="e.g. Home" v-model="address.name"
         @input="dirty = true" />
       <ValidationError :errors="errors" fieldName="name" />
-      <label>Street Address</label>
-      <input placeholder="e.g. 123 Main St." v-model="address.line1"
+      <div class="label">Street Address</div>
+      <input class="input w-full" placeholder="e.g. 123 Main St." v-model="address.line1"
         @input="dirty = true" />
       <ValidationError :errors="errors" fieldName="email" />
-      <input placeholder="e.g. Suite 500" v-model="address.line2"
+      <input class="input w-full" placeholder="e.g. Suite 500" v-model="address.line2"
         @input="dirty = true" />
       <ValidationError :errors="errors" fieldName="email" />
-      <input placeholder="e.g. 2nd Floor" v-model="address.line3"
+      <input class="input w-full" placeholder="e.g. 2nd Floor" v-model="address.line3"
         @input="dirty = true" />
       <ValidationError :errors="errors" fieldName="email" />
-      <label>City</label>
-      <input placeholder="e.g. Atlanta" v-model="address.cityTown"
+      <div class="label">City</div>
+      <input class="input w-full" placeholder="e.g. Atlanta" v-model="address.cityTown"
         @input="dirty = true" />
       <ValidationError :errors="errors" fieldName="cityTown" />
-      <label>State/Province</label>
-      <input placeholder="e.g. GA" v-model="address.stateProvince"
+      <div class="label">State/Province</div>
+      <input class="input w-full" placeholder="e.g. GA" v-model="address.stateProvince"
         @input="dirty = true" />
       <ValidationError :errors="errors" fieldName="stateProvince" />
-      <label>Postal Code</label>
-      <input placeholder="e.g. 30303" v-model="address.postalCode"
+      <div class="label">Postal Code</div>
+      <input class="input w-full" placeholder="e.g. 30303" v-model="address.postalCode"
         @input="dirty = true" />
       <ValidationError :errors="errors" fieldName="postalCode" />
-      <label>Country</label>
-      <input placeholder="e.g. United States" v-model="address.country"
+      <div class="label">Country</div>
+      <input class="input w-full" placeholder="e.g. United States" v-model="address.country"
         @input="dirty = true" />
       <ValidationError :errors="errors" fieldName="country" />
   </div>
