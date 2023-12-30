@@ -8,7 +8,7 @@ public class EntryAddressesApi : IApi
 {
   public void Register(IEndpointRouteBuilder builder)
   {
-    var grp = builder.MapGroup("/api/book/entries/{id:int}/addresses");
+    var grp = builder.MapGroup("/api/entries/{id:int}/addresses");
 
     grp.MapGet("", GetAddresses);
     grp.MapGet("{addressId:int}", GetAddress);

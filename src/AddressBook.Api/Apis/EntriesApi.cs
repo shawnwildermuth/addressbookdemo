@@ -10,7 +10,7 @@ public class EntriesApi : IApi
 {
   public void Register(IEndpointRouteBuilder builder)
   {
-    var grp = builder.MapGroup("/api/book/entries");
+    var grp = builder.MapGroup("/api/entries");
 
     grp.MapGet("lookup", GetLookup);
 

@@ -1,25 +1,20 @@
 @host = http://localhost:8000
 
-GET {{host}}/api/book
+GET {{host}}/api/entries
 Accept: application/json
 
 ###
 
-GET {{host}}/api/book/entries
+GET {{host}}/api/entries/lookup
+Accept: application/json
+
+###
+GET {{host}}/api/entries/40
 Accept: application/json
 
 ###
 
-GET {{host}}/api/book/entries/lookup
-Accept: application/json
-
-###
-GET {{host}}/api/book/entries/40
-Accept: application/json
-
-###
-
-POST {{host}}/api/book/entries
+POST {{host}}/api/entries
 Content-Type: application/json
 
 {
@@ -34,7 +29,7 @@ Content-Type: application/json
 
 ### 
 
-PUT {{host}}/api/book/entries/51
+PUT {{host}}/api/entries/51
 Content-Type: application/json
 
 {
@@ -50,15 +45,15 @@ Content-Type: application/json
 
 ### 
 
-DELETE {{host}}/api/book/entries/51
+DELETE {{host}}/api/entries/51
 
 ###
 
-GET {{host}}/api/book/entries/40/addresses
+GET {{host}}/api/entries/40/addresses
 ###
-GET {{host}}/api/book/entries/40/addresses/80
+GET {{host}}/api/entries/40/addresses/80
 ###
-POST {{host}}/api/book/entries/40/addresses
+POST {{host}}/api/entries/40/addresses
 Content-Type: application/json
 
 {
@@ -73,7 +68,7 @@ Content-Type: application/json
 }
 
 ###
-PUT {{host}}/api/book/entries/40/addresses/101
+PUT {{host}}/api/entries/40/addresses/101
 Content-Type: application/json
 
 {
@@ -89,6 +84,6 @@ Content-Type: application/json
 }
 
 ###
-DELETE {{host}}/api/book/entries/40/addresses/101
+DELETE {{host}}/api/entries/40/addresses/101
 ###
 

@@ -1,6 +1,6 @@
-import type { BookEntryModel } from "@/models/bookEntryModel";
+import type { EntryModel } from "@/models";
 
-export function formatName(entry?: BookEntryModel) {
+export function formatName(entry?: EntryModel) {
   if (entry?.firstName && entry.lastName && entry.middleName) {
     return `${entry.lastName}, ${entry.firstName} ${entry.middleName}`;
   } else if (entry?.firstName && entry.lastName) {

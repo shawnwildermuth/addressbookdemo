@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watch } from 'vue';
+import { computed } from 'vue';
 
 
 const props = defineProps<{
@@ -19,7 +19,7 @@ const errorItems = computed(() => {
 
 <template>
   <div class="label">
-  <div class="label-text text-red-400" v-if="errorItems">
+  <div class="label-text text-warning" v-if="errorItems">
     <div v-for="e in errorItems" :key="e">
       {{ e }}
     </div>

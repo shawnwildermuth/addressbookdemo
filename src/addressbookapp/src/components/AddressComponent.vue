@@ -8,7 +8,6 @@ import ConfirmationDialog from "./ConfirmationDialog.vue";
 const store = useStore();
 const confirmDialog = ref<typeof ConfirmationDialog>();
 const addressDialog = ref<typeof AddressDialog>();
-const editorAddress = ref<Address|null>(null);
 
 const props = defineProps<{
   address: AddressModel,

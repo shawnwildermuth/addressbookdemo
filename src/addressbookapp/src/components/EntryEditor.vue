@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { EntryModel } from '@/models';
 import { useStore } from '@/store';
-import { onMounted, reactive, ref, watch } from 'vue';
+import { onMounted, ref } from 'vue';
 import { cloneDeep } from "lodash";
 import { useRouter } from 'vue-router';
 import { entrySchema } from "@/schemas/bookEntry";
@@ -14,7 +14,7 @@ const store = useStore();
 const router = useRouter();
 
 const props = defineProps<{
-  id: Number
+  id: number
 }>();
 
 const entry = ref<EntryModel>();

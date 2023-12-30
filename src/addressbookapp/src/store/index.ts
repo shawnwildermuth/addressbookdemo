@@ -25,7 +25,7 @@ export const useStore = defineStore("main", {
       if (this.entries.length === 0) {
         try {
           this.startRequest();
-          const result = await http.get<Array<EntryLookupModel>>("/api/book/entries/lookup");
+          const result = await http.get<Array<EntryLookupModel>>("/api/entries/lookup");
           this.entries.splice(0, this.entries.length, ...result);
           this.sortEntities();
         } catch (e: any) {
@@ -38,7 +38,7 @@ export const useStore = defineStore("main", {
     async getEntryById(id: Number) {
       try {
         this.startRequest();
-        const result = await http.get<EntryModel>(`/api/book/entries/${id}`);
+        const result = await http.get<EntryModel>(`/api/entries/${id}`);
         return result;
       } catch (e: any) {
         this.errorMessage = e;
@@ -49,7 +49,7 @@ export const useStore = defineStore("main", {
     async saveEntry(data: EntryModel) {
       try {
         this.startRequest();
-        const result = await http.post<EntryModel>("/api/book/entries", data);
+        const result = await http.post<EntryModel>("/api/entries", data);
         this.entries.push({
           id: result.id,
           displayName: formatName(result),
@@ -66,7 +66,7 @@ export const useStore = defineStore("main", {
     async updateEntry(data: EntryModel) {
       try {
         this.startRequest();
-        const result = await http.put<EntryModel>(`/api/book/entries/${data.id}`, data);
+        const result = await http.put<EntryModel>(`/api/entries/${data.id}`, data);
         this.entries.splice(this.entries.findIndex(e => e.id == data.id), 1);
         this.entries.push({
           id: result.id,
@@ -84,7 +84,7 @@ export const useStore = defineStore("main", {
     async deleteEntry(data: EntryModel) {
       try {
         this.startRequest();
-        const result = await http.deleteItem(`/api/book/entries/${data.id}`);
+        const result = await http.deleteItem(`/api/entries/${data.id}`);
         if (result) {
           this.entries.splice(this.entries.findIndex(e => e.id == data.id), 1);
         } else {
@@ -108,7 +108,7 @@ export const useStore = defineStore("main", {
     async getAddressById(entry: EntryModel, id: Number) {
       try {
         this.startRequest();
-        const result = await http.get<AddressModel>(`/api/book/entries/${entry.id}/addresses/${id}`);
+        const result = await http.get<AddressModel>(`/api/entries/${entry.id}/addresses/${id}`);
         return result;
       } catch (e: any) {
         this.errorMessage = e;
@@ -119,7 +119,7 @@ export const useStore = defineStore("main", {
     async saveAddress(entry: EntryModel, data: AddressModel) {
       try {
         this.startRequest();
-        const result = await http.post<AddressModel>(`/api/book/entries/${entry.id}/addresses/`, data);
+        const result = await http.post<AddressModel>(`/api/entries/${entry.id}/addresses/`, data);
         entry.addresses.push(result);
         return result.id;
       } catch (e: any) {
@@ -132,7 +132,7 @@ export const useStore = defineStore("main", {
     async updateAddress(entry: EntryModel, data: AddressModel) {
       try {
         this.startRequest();
-        const result = await http.put<AddressModel>(`/api/book/entries/${entry.id}/addresses/${data.id}`, 
+        const result = await http.put<AddressModel>(`/api/entries/${entry.id}/addresses/${data.id}`, 
           data);
         entry.addresses.splice(entry.addresses.findIndex(a => a.id == data.id), 1);
         entry.addresses.push(result);
@@ -147,7 +147,7 @@ export const useStore = defineStore("main", {
     async deleteAddress(entry: EntryModel, data: AddressModel) {
       try {
         this.startRequest();
-        const result = await http.deleteItem(`/api/book/entries/${entry.id}/addresses/${data.id}`);
+        const result = await http.deleteItem(`/api/entries/${entry.id}/addresses/${data.id}`);
         if (result) {
           entry.addresses.splice(entry.addresses.findIndex(a => a.id == data.id), 1);
         } else {
