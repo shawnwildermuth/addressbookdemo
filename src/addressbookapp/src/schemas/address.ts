@@ -1,6 +1,6 @@
-import { object, string } from "zod";
+import { object, string, type AnyZodObject } from "zod";
 
-export const addressSchema = object({
+const schema = object({
   name: string().min(1),
   line1: string().min(1),
   line2: string().optional(),
@@ -10,3 +10,10 @@ export const addressSchema = object({
   postalCode: string().min(5),
   country: string().optional()
 });
+
+export function useAddressSchema(additionalRules: AnyZodObject) {
+  if (additionalRules) {
+    return schema.merge(additionalRules);
+  }
+  return schema;
+}

@@ -17,7 +17,7 @@ public class BookEntryFaker : Faker<BookEntry>
       .RuleFor(c => c.CellPhone, f => f.Phone.PhoneNumberFormat().OrNull(f, 0.5f))
       .RuleFor(c => c.HomePhone, f => f.Phone.PhoneNumberFormat().OrNull(f, 0.5f))
       .RuleFor(c => c.WorkPhone, f => f.Phone.PhoneNumberFormat().OrNull(f, 0.5f))
-      .RuleFor(c => c.Gender, f => f.Person.Gender.ToString())
+      .RuleFor(c => c.Gender, f => f.Person.Gender.OrNull(f, 0.5f)?.ToString())
       .RuleFor(c => c.Email, (f, e) => f.Internet.Email(e.FirstName, e.LastName))
       .RuleFor(c => c.DateOfBirth, f => f.Person.DateOfBirth);
   }

@@ -35,18 +35,21 @@ public class BookContext
   {
     base.OnModelCreating(modelBuilder);
 
-    var entries = _entryFaker.Generate(25);
-    var addresses = _addrFaker.Generate(50);
+    var entries = _entryFaker.Generate(100);
+    var addresses = new List<Address>();
 
     int counter = 0;
     foreach (var entry in entries)
     {
-      var entryAddresses = addresses.Skip(counter).Take(2);
-      counter += 2;
+      var noOfAddresses = Random.Shared.Next(0, 2);
+      var entryAddresses = _addrFaker.Generate(noOfAddresses);
+      addresses.AddRange(entryAddresses);
+      counter += noOfAddresses;
 
-      entryAddresses.ElementAt(0).BookEntryId = entry.Id;
-      entryAddresses.ElementAt(1).BookEntryId = entry.Id;
-
+      for (var x = 0; x < noOfAddresses; ++x)
+      {
+        entryAddresses.ElementAt(x).BookEntryId = entry.Id;
+      }
     }
 
     modelBuilder.Entity<Address>()
