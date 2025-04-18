@@ -5,10 +5,10 @@ namespace AddressBook.Api.Data;
 
 public class AddressFaker : Faker<Address>
 {
-  public AddressFaker()
+  public AddressFaker() : base("en_US")
   {
-    UseSeed(1969)
-      .RuleFor(c => c.Id, f => ++f.IndexVariable)
+
+      RuleFor(c => c.Id, f => ++f.IndexVariable)
       .RuleFor(c => c.Name, f => f.Random.Words(2))
       .RuleFor(c => c.Line1, f => f.Address.StreetAddress())
       .RuleFor(c => c.Line2, f => f.Address.SecondaryAddress().OrNull(f, .5f))
@@ -16,6 +16,6 @@ public class AddressFaker : Faker<Address>
       .RuleFor(c => c.CityTown, f => f.Address.City())
       .RuleFor(c => c.StateProvince, f => f.Address.State())
       .RuleFor(c => c.PostalCode, f => f.Address.ZipCode())
-      .RuleFor(c => c.Country, f => f.Address.Country());
+      .RuleFor(c => c.Country, f => "United States");
   }
 }
