@@ -1,4 +1,4 @@
-﻿using AddressBook.Api.Data.Entities;
+using AddressBook.Api.Data.Entities;
 using Bogus;
 
 namespace AddressBook.Api.Data;
