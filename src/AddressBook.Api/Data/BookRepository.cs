@@ -7,7 +7,7 @@ public class BookRepository(BookContext context) : IBookRepository
 
   public async Task<IEnumerable<BookEntry>> GetAllEntries()
   {
-    return await context.BookEntries
+    return await context.People
       .Include(b => b.Addresses)
       //.Where(b => b.UserName == Thread.CurrentPrincipal?.Identity?.Name)
       .OrderBy(b => b.LastName)
@@ -17,7 +17,7 @@ public class BookRepository(BookContext context) : IBookRepository
 
   public async Task<BookEntry?> GetEntry(int id)
   {
-    return await context.BookEntries
+    return await context.People
       .Include(b => b.Addresses)
       .Where(b => b.Id == id)
       //.Where(b => b.UserName == Thread.CurrentPrincipal?.Identity?.Name)
@@ -63,7 +63,7 @@ public class BookRepository(BookContext context) : IBookRepository
 
   public async Task<IEnumerable<BookEntry>> GetLookupEntries()
   {
-    return await context.BookEntries
+    return await context.People
       //.Where(b => b.UserName == Thread.CurrentPrincipal?.Identity?.Name)
       .OrderBy(b => b.LastName)
       .ThenBy(b => b.FirstName)

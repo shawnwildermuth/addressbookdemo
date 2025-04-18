@@ -16,6 +16,6 @@ public class AddressFaker : Faker<Address>
       .RuleFor(c => c.CityTown, f => f.Address.City())
       .RuleFor(c => c.StateProvince, f => f.Address.State())
       .RuleFor(c => c.PostalCode, f => f.Address.ZipCode())
-      .RuleFor(c => c.Country, f => "United States of America");
+      .RuleFor(c => c.Country, f => "USA");
   }
 }

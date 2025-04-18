@@ -23,7 +23,7 @@ public class BookContext
     Randomizer.Seed = new Random(1337);
   }
 
-  public DbSet<BookEntry> BookEntries => Set<BookEntry>();
+  public DbSet<BookEntry> People => Set<BookEntry>();
   public DbSet<Address> Addresses => Set<Address>();
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
