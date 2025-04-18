@@ -4,10 +4,11 @@ import ModalDialog from './ModalDialog.vue';
 import { useStore } from '@/store';
 import type { inferFormattedError } from 'zod';
 import { onMounted, ref } from 'vue';
-import { addressSchema } from "@/schemas/address";
+import { useAddressSchema } from "@/schemas/address";
 import { cloneDeep } from "lodash";
 import ValidationError from "./ValidationError.vue";
 
+const addressSchema = useAddressSchema();
 
 const props = defineProps<{
   entry: EntryModel,
