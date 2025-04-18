@@ -54,7 +54,7 @@ function confirmDelete(confirm: boolean) {
       {{ address.stateProvince }} {{ address.postalCode }}
     </div>
     <div v-if="address.country">{{ address.country }}</div>
-    <div><a :href="getGoogleMapsLink" target="_blank">Map</a></div>
+    <div><a :href="getGoogleMapsLink()" target="_blank">Map</a></div>
   </div>
   </div>
   </div>

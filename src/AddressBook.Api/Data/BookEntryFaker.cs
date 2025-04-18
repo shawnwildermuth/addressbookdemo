@@ -5,11 +5,9 @@ namespace AddressBook.Api.Data;
 
 public class BookEntryFaker : Faker<BookEntry>
 {
-	public BookEntryFaker(AddressFaker addrFaker)
-	{
- 
-    UseSeed(1969) // Use any number
-      .RuleFor(c => c.Id, f => ++f.IndexVariable)
+	public BookEntryFaker(AddressFaker addrFaker) : base("en_US")
+  {
+      RuleFor(c => c.Id, f => ++f.IndexVariable)
       .RuleFor(c => c.CompanyName, f => f.Company.CompanyName())
       .RuleFor(c => c.FirstName, f => f.Name.FirstName())
       .RuleFor(c => c.MiddleName, f => f.Name.FirstName())

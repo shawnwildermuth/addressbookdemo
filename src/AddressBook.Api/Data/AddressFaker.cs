@@ -1,14 +1,14 @@
-﻿using AddressBook.Api.Data.Entities;
+using AddressBook.Api.Data.Entities;
 using Bogus;
 
 namespace AddressBook.Api.Data;
 
 public class AddressFaker : Faker<Address>
 {
-  public AddressFaker()
+  public AddressFaker() : base("en_US")
   {
-    UseSeed(1969)
-      .RuleFor(c => c.Id, f => ++f.IndexVariable)
+
+      RuleFor(c => c.Id, f => ++f.IndexVariable)
       .RuleFor(c => c.Name, f => f.Random.Words(2))
       .RuleFor(c => c.Line1, f => f.Address.StreetAddress())
       .RuleFor(c => c.Line2, f => f.Address.SecondaryAddress().OrNull(f, .5f))
