@@ -1,4 +1,5 @@
 using AddressBook.Api.Data.Entities;
+using Bogus;
 using Microsoft.EntityFrameworkCore;
 
 namespace AddressBook.Api.Data;
@@ -19,6 +20,7 @@ public class BookContext
     _config = config;
     _entryFaker = entryFaker;
     _addrFaker = addrFaker;
+    Randomizer.Seed = new Random(1337);
   }
 
   public DbSet<BookEntry> BookEntries => Set<BookEntry>();
